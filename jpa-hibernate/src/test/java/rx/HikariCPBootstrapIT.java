@@ -9,7 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class HikariCPBootstrapIT extends AbstractITConfigTemplate {
     /**
-     * based on https://github.com/brettwooldridge/HikariCP?tab=readme-ov-file#rocket-initialization
+     * based on
+     *  - https://mariadb.com/kb/en/about-mariadb-connector-j/
+     *  and can learn from
+     *  - https://github.com/brettwooldridge/HikariCP?tab=readme-ov-file#rocket-initialization
      */
     @Test
     public void testDataSource() throws SQLException {
