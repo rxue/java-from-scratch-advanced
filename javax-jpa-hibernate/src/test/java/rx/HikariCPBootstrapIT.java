@@ -3,6 +3,7 @@ package rx;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariJNDIFactory;
 import org.junit.jupiter.api.Test;
+import org.osjava.sj.SimpleJndiContextFactory;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -46,29 +47,19 @@ public class HikariCPBootstrapIT extends AbstractITConfigTemplate {
     public void testBootstrapHikariCPWithInitialContext() throws NamingException {
 
         final Properties env = new Properties();
-        env.put("org.osjava.sj.root", "src/test/java/hikari/roots/HikariCP");
-        env.put("java.naming.factory.initial", "org.osjava.sj.SimpleContextFactory");
-        env.put("org.osjava.sj.jndi.shared", "true");
-        env.put("org.osjava.sj.delimiter", ".");
-        env.put("jndi.syntax.separator", "/");
+        env.put("org.osjava.sj.root", "src/test/resources/hikaricp");
+        env.put(Context.INITIAL_CONTEXT_FACTORY, SimpleJndiContextFactory.class.getName());
         env.put(Context.OBJECT_FACTORIES, HikariJNDIFactory.class.getName());
         InitialContext ctx = new InitialContext(env);
         DataSource ds = (DataSource) ctx.lookup("HikariDataSource");
         assertNotNull(ds);
-        /*Properties properties = new Properties();
-        properties.put(InitialContext.INITIAL_CONTEXT_FACTORY, "org.osjava.sj.SimpleJndiContextFactory");
-        properties.put("org.osjava.sj.jndi.shared","true");
-        properties.put("org.osjava.sj.space","java:/comp/env");
-        InitialContext initialContext = new InitialContext(properties);
-        HikariDataSource ds = new HikariDataSource();
-        ds.setMaximumPoolSize(20);
-        ds.setDriverClassName("org.mariadb.jdbc.Driver");
-        ds.setJdbcUrl("jdbc:mariadb://localhost:3307/test");
-        ds.addDataSourceProperty("user", "root");
-        ds.addDataSourceProperty("password", "test");
-        ds.setAutoCommit(false);
-        initialContext.bind("java:/comp/env/jboss/datasources/MariaDBDS", ds);
+    }
+
+    @Test
+    public void testBootstrapHibernateWithHikariCPAndInitialContext() throws NamingException {
+        System.setProperty("org.osjava.sj.root","src/test/resources/hikaricp");
+        System.setProperty(Context.OBJECT_FACTORIES, HikariJNDIFactory.class.getName());
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb-test");
-        assertNotNull(emf);*/
+        assertNotNull(emf);
     }
 }
