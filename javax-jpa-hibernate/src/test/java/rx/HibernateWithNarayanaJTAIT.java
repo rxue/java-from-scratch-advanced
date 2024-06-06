@@ -23,38 +23,34 @@ import static org.junit.jupiter.api.Assertions.*;
 public class HibernateWithNarayanaJTAIT extends AbstractITConfigTemplate {
     @Test
     public void testUserTransactionCommit() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb-test");
         UserTransaction tx = com.arjuna.ats.jta.UserTransaction.userTransaction();
         tx.begin();
         EntityManager em = emf.createEntityManager();
         TestEntity e = new TestEntity();
         em.persist(e);
-        tx.commit();
         em.close();
+        tx.commit();
 
         EntityManager em2 = emf.createEntityManager();
         List<TestEntity> result = em2.createQuery("select e from TestEntity e")
                 .getResultList();
         assertFalse(result.isEmpty());
         em2.close();
-        emf.close();
     }
     @Test
     public void testUserTransactionRollback() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb-test");
         UserTransaction tx = com.arjuna.ats.jta.UserTransaction.userTransaction();
         tx.begin();
         EntityManager em = emf.createEntityManager();
         TestEntity e = new TestEntity();
         em.persist(e);
-        tx.rollback();
         em.close();
+        tx.rollback();
 
         EntityManager em2 = emf.createEntityManager();
         List<TestEntity> result = em2.createQuery("select e from TestEntity e")
                 .getResultList();
         assertTrue(result.isEmpty());
         em2.close();
-        emf.close();
     }
 }

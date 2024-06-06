@@ -21,7 +21,7 @@ import java.util.Collections;
 
 public abstract class AbstractITConfigTemplate {
     private static MariaDBContainer<?> db;
-    private static EntityManagerFactory emf;
+    protected static EntityManagerFactory emf;
 
     @BeforeAll
     public static void initEnvironment() {
