@@ -14,9 +14,6 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.charset_name" value="UTF-8" />
             <property name="hibernate.jndi.class" value ="org.osjava.sj.SimpleJndiContextFactory" />
-            <property name="org.osjava.sj.root" value ="src/test/resources/hikaricp" />
-            <property name="org.osjava.sj.jndi.shared" value="true" />
-            <property name="java.naming.factory.object" value="com.zaxxer.hikari.HikariJNDIFactory" />
             <property name="hibernate.transaction.jta.platform" value="JBossTS"/>
             <property name="hibernate.transaction.coordinator_class" value="jta"/>
         </properties>
