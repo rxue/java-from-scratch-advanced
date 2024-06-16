@@ -54,12 +54,6 @@
             <version>7.0.1.Final</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.h-thurow</groupId>
-            <artifactId>simple-jndi</artifactId>
-            <version>0.24.0</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
