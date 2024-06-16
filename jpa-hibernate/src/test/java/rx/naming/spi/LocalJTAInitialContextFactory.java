@@ -22,13 +22,9 @@ public class LocalJTAInitialContextFactory implements InitialContextFactory {
     }
     @Override
     public Context getInitialContext(Hashtable<?, ?> hashtable) throws NamingException {
-        //final Properties env = new Properties();
-        //env.put(Context.INITIAL_CONTEXT_FACTORY, this.getClass().getName());
         Context context = new MemoryContext();
         try {
             MariaDbDataSource ds = new MariaDbDataSource(properties.getProperty("dataSource.url"));
-            ds.setUser("root");
-            ds.setPassword("password");
             context.bind("mariaDBDataSource", ds);
         } catch (SQLException e) {
             throw new RuntimeException(e);

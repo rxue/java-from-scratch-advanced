@@ -1,12 +1,10 @@
 package rx;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Persistence;
 import jakarta.transaction.*;
 import org.junit.jupiter.api.Test;
 import rx.jpa.TestEntity;
+import rx.util.Util;
 
 import java.sql.ResultSet;
 
@@ -32,7 +30,7 @@ public class MariaDBDataSourceBootstrapIT extends AbstractITConfigTemplate {
 
     @Test
     public void useEntityManagerAfterBootstrap_withUserTransaction_commit() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
-        UserTransaction tx = com.arjuna.ats.jta.UserTransaction.userTransaction();
+        UserTransaction tx = Util.userTransaction();
         tx.begin();
         try (EntityManager em = emf.createEntityManager()) {
             TestEntity newEntity = new TestEntity();
@@ -46,8 +44,8 @@ public class MariaDBDataSourceBootstrapIT extends AbstractITConfigTemplate {
     }
 
     @Test
-    public void useEntityManagerAfterBootstrap_withUserTransaction_rollback() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
-        UserTransaction tx = com.arjuna.ats.jta.UserTransaction.userTransaction();
+    public void useEntityManagerAfterBootstrap_withUserTransaction_rollback() throws SystemException, NotSupportedException {
+        UserTransaction tx = Util.userTransaction();
         tx.begin();
         try (EntityManager em = emf.createEntityManager()) {
             TestEntity newEntity = new TestEntity();
