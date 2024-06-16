@@ -1,7 +1,9 @@
 package rx;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import org.hibernate.Session;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,11 +34,13 @@ public abstract class AbstractITConfigTemplate {
     }
 
     protected static void executeInJDBCConnection(SQLStatementConsumer<Statement> consumer) {
-        try (Connection conn = DriverManager.getConnection(Util.getJdbcURL(), "root", "test");
-             Statement stmt = conn.createStatement()) {
-            consumer.accept(stmt);
-        } catch (SQLException e) {
-            System.out.println("JDBC execution failure");
+        try (EntityManager em = emf.createEntityManager()) {
+            Session session = em.unwrap(Session.class);
+            session.doWork(connection -> {
+                try (Statement stmt = connection.createStatement()) {
+                    consumer.accept(stmt);
+                }
+            });
         }
     }
 
