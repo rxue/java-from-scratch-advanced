@@ -20,7 +20,6 @@ public class LocalJTAInitialContextFactory implements InitialContextFactory {
             throw new RuntimeException(e);
         }
     }
-            //new Properties("src/test/resources/datasource.properties");
     @Override
     public Context getInitialContext(Hashtable<?, ?> hashtable) throws NamingException {
         //final Properties env = new Properties();
