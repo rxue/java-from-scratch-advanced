@@ -7,13 +7,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.utility.DockerImageName;
+import rx.util.Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
-import java.util.function.Consumer;
 
 public abstract class AbstractITConfigTemplate {
     private static MariaDBContainer<?> db;
@@ -32,7 +32,7 @@ public abstract class AbstractITConfigTemplate {
     }
 
     protected static void executeInJDBCConnection(SQLStatementConsumer<Statement> consumer) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3307/test", "root", "test");
+        try (Connection conn = DriverManager.getConnection(Util.getJdbcURL(), "root", "test");
              Statement stmt = conn.createStatement()) {
             consumer.accept(stmt);
         } catch (SQLException e) {
