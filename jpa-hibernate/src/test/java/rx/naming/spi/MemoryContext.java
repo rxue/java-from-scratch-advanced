@@ -21,7 +21,7 @@ class MemoryContext implements Context {
 
     @Override
     public void bind(Name name, Object o) throws NamingException {
-
+        System.out.println("bind by Name");
     }
 
     @Override
@@ -31,11 +31,12 @@ class MemoryContext implements Context {
 
     @Override
     public void rebind(Name name, Object o) throws NamingException {
-
+        System.out.println("rebind by Name");
     }
 
     @Override
     public void rebind(String s, Object o) throws NamingException {
+        System.out.println("rebind by String");
 
     }
 

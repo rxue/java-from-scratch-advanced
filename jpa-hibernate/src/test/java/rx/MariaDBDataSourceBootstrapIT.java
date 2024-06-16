@@ -1,5 +1,6 @@
 package rx;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class MariaDBDataSourceBootstrapIT extends AbstractITConfigTemplate {
      *  - https://mariadb.com/kb/en/about-mariadb-connector-j/
      */
     @Test
-    public void bootstrapHibernateJPAWithDataSource() throws SQLException {
+    public void bootstrapHibernateJPAWithDataSource() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("mariadb-test");//, Collections.singletonMap("hibernate.connection.datasource",ds));
         assertNotNull(emf);
     }
