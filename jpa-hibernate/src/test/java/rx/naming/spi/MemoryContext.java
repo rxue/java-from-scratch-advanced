@@ -9,150 +9,147 @@ import java.util.Map;
 class MemoryContext implements Context {
     private Map<String,Object> lookupMap = new HashMap<>();
     @Override
-    public Object lookup(Name name) throws NamingException {
-        final OneLevelName oneLevelName = (OneLevelName) name;
-        return lookupMap.get(oneLevelName.value());
+    public Object lookup(Name name) {
+        return lookupMap.get(name.get(0));
     }
 
     @Override
-    public Object lookup(String s) throws NamingException {
-        return null;
+    public Object lookup(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void bind(Name name, Object o) throws NamingException {
-        System.out.println("bind by Name");
+    public void bind(Name name, Object o) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void bind(String s, Object o) throws NamingException {
+    public void bind(String s, Object o) {
         lookupMap.put(s, o);
     }
 
     @Override
-    public void rebind(Name name, Object o) throws NamingException {
-        System.out.println("rebind by Name");
+    public void rebind(Name name, Object o) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void rebind(String s, Object o) throws NamingException {
-        System.out.println("rebind by String");
-
+    public void rebind(String s, Object o) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void unbind(Name name) throws NamingException {
-
+    public void unbind(Name name) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void unbind(String s) throws NamingException {
-
+    public void unbind(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void rename(Name name, Name name1) throws NamingException {
-
+    public void rename(Name name, Name name1) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void rename(String s, String s1) throws NamingException {
-
+    public void rename(String s, String s1) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public NamingEnumeration<NameClassPair> list(Name name) throws NamingException {
-        return null;
+    public NamingEnumeration<NameClassPair> list(Name name) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public NamingEnumeration<NameClassPair> list(String s) throws NamingException {
-        return null;
+    public NamingEnumeration<NameClassPair> list(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public NamingEnumeration<Binding> listBindings(Name name) throws NamingException {
-        return null;
+    public NamingEnumeration<Binding> listBindings(Name name) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public NamingEnumeration<Binding> listBindings(String s) throws NamingException {
-        return null;
+    public NamingEnumeration<Binding> listBindings(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void destroySubcontext(Name name) throws NamingException {
-
+    public void destroySubcontext(Name name) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void destroySubcontext(String s) throws NamingException {
-
+    public void destroySubcontext(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Context createSubcontext(Name name) throws NamingException {
-        return null;
+    public Context createSubcontext(Name name) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Context createSubcontext(String s) throws NamingException {
-        return null;
+    public Context createSubcontext(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Object lookupLink(Name name) throws NamingException {
-        return null;
+    public Object lookupLink(Name name) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Object lookupLink(String s) throws NamingException {
-        return null;
+    public Object lookupLink(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public NameParser getNameParser(Name name) throws NamingException {
-        return null;
+    public NameParser getNameParser(Name name) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public NameParser getNameParser(String s) throws NamingException {
+    public NameParser getNameParser(String s) {
         return  OneLevelName::new;
     }
 
     @Override
-    public Name composeName(Name name, Name name1) throws NamingException {
-        return null;
+    public Name composeName(Name name, Name name1) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public String composeName(String s, String s1) throws NamingException {
-        return "";
+    public String composeName(String s, String s1) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Object addToEnvironment(String s, Object o) throws NamingException {
-        return null;
+    public Object addToEnvironment(String s, Object o) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Object removeFromEnvironment(String s) throws NamingException {
-        return null;
+    public Object removeFromEnvironment(String s) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public Hashtable<?, ?> getEnvironment() throws NamingException {
-        return null;
+    public Hashtable<?, ?> getEnvironment() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void close() throws NamingException {
-
+    public void close() {
     }
 
     @Override
-    public String getNameInNamespace() throws NamingException {
-        return "";
+    public String getNameInNamespace() {
+        throw new UnsupportedOperationException();
     }
 
     private static class OneLevelName implements Name {
@@ -163,80 +160,78 @@ class MemoryContext implements Context {
 
         @Override
         public Object clone() {
-            return null;
+            throw new UnsupportedOperationException();
+
         }
 
         @Override
         public int compareTo(Object o) {
-            return 0;
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public int size() {
-            return 0;
+            return 1;
         }
 
         @Override
         public boolean isEmpty() {
-            return false;
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public Enumeration<String> getAll() {
-            return null;
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public String get(int i) {
-            return "";
+            return value;
         }
 
         @Override
         public Name getPrefix(int i) {
-            return null;
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public Name getSuffix(int i) {
-            return null;
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public boolean startsWith(Name name) {
-            return false;
+            throw new UnsupportedOperationException();
         }
 
         @Override
         public boolean endsWith(Name name) {
-            return false;
+            throw new UnsupportedOperationException();
         }
 
         @Override
-        public Name addAll(Name name) throws InvalidNameException {
-            return null;
+        public Name addAll(Name name) {
+            throw new UnsupportedOperationException();
         }
 
         @Override
-        public Name addAll(int i, Name name) throws InvalidNameException {
-            return null;
+        public Name addAll(int i, Name name) {
+            throw new UnsupportedOperationException();
         }
 
         @Override
-        public Name add(String s) throws InvalidNameException {
-            return null;
+        public Name add(String s) {
+            throw new UnsupportedOperationException();
         }
 
         @Override
-        public Name add(int i, String s) throws InvalidNameException {
-            return null;
+        public Name add(int i, String s) {
+            throw new UnsupportedOperationException();
         }
 
         @Override
-        public Object remove(int i) throws InvalidNameException {
-            return null;
-        }
-        String value() {
-            return value;
+        public Object remove(int i) {
+            throw new UnsupportedOperationException();
         }
     }
 }
