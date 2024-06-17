@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.utility.DockerImageName;
+import rx.util.Util;
+
 import java.sql.Statement;
 import java.util.Collections;
 
@@ -18,8 +20,9 @@ public abstract class AbstractITConfigTemplate {
 
     @BeforeAll
     public static void init() {
+        System.setProperty("port", "3307");
         db = new MariaDBContainer<>(DockerImageName.parse("mariadb:10.5.8"));
-        db.setPortBindings(Collections.singletonList("3307:3306"));
+        db.setPortBindings(Collections.singletonList(Util.getPortNumber() + ":3306"));
         db.start();
         emf = Persistence.createEntityManagerFactory("mariadb-test");
     }

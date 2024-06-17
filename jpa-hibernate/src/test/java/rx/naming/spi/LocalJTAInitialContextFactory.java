@@ -13,7 +13,7 @@ public class LocalJTAInitialContextFactory implements InitialContextFactory {
     public Context getInitialContext(Hashtable<?, ?> hashtable) {
         Context context = new MemoryContext();
         try {
-            MariaDbDataSource ds = new MariaDbDataSource(Util.getJdbcURL());
+            MariaDbDataSource ds = new MariaDbDataSource("jdbc:mariadb://localhost:" + Util.getPortNumber() + "/test");
             context.bind("mariaDBDataSource", ds);
         } catch (SQLException e) {
             throw new RuntimeException(e);
